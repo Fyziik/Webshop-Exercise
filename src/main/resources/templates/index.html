@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
@@ -7,6 +7,55 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline" method="post" action="/search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+
+
+
+
+    <!-- Make a single box of product for each product -->
+    <div class="container jumbotron ">
+        <table class="w-100">
+            <tr class="col-3">
+                <th>Image</th>
+                <th>Product</th>
+                <th>ID</th>
+                <th>Price</th>
+            </tr>
+            <tr style="border: black solid 2px" th:each="product : ${products}" class="tableBackground">
+                <form action="/addProductToCart" method="post">
+                    <td class="fixTd"><img  class="fixImage" th:block th:src="${product.image}"></img></td>
+                    <td th:text="${product.name}"></td>
+                    <td class="fixIDTd" th:text="${product.ID}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td><button class="btn btn-primary btn-lg">Add to cart</button></td>
+                </form>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Current shopping cart -->
+    <div id="cart">
+        <h1>Current shopping cart</h1>
+        <table>
+            <th>Name</th>
+            <th>price each</th>
+            <th>quantity</th>
+            <th>total</th>
+            <tr style="border: black solid 1px" th:each="item : ${cart}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <!-- TODO once I have sorted out a list, needs quantity and be able to calculate total via quantity * price -->
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.name}"></td>
+            </tr>
+        </table>
+    </div>
 
 </body>
 </html>

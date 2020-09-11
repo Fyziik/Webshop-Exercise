@@ -1,0 +1,37 @@
+tr:nth-of-type(even) {
+    background-color: rgb(204, 204, 204);
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    border-left: black solid 1.5px;
+    border-right: black solid 1.5px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.fixImage {
+    width: 250px;
+    height: 250px;
+}
+
+.fixTd {
+    width: 25%;
+}
+
+.fixIDTd {
+    width: 10%;
+}
+
+#cart {
+    background-color: red;
+    position: absolute;
+    justify-content: end;
+}
+
+#cart table {
+
+}
