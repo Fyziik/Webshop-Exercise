@@ -15,7 +15,23 @@
         </form>
     </nav>
 
-
+    <!-- Current shopping cart -->
+    <div id="cart">
+        <h1>Current shopping cart</h1>
+        <table>
+            <th>Name</th>
+            <th>price each</th>
+            <th>quantity</th>
+            <th>total</th>
+            <tr style="border: black solid 1px" th:each="item : ${cart}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <!-- TODO once I have sorted out a list, needs quantity and be able to calculate total via quantity * price -->
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.name}"></td>
+            </tr>
+        </table>
+    </div>
 
 
     <!-- Make a single box of product for each product -->
@@ -39,23 +55,7 @@
         </table>
     </div>
 
-    <!-- Current shopping cart -->
-    <div id="cart">
-        <h1>Current shopping cart</h1>
-        <table>
-            <th>Name</th>
-            <th>price each</th>
-            <th>quantity</th>
-            <th>total</th>
-            <tr style="border: black solid 1px" th:each="item : ${cart}">
-                <td th:text="${product.name}"></td>
-                <td th:text="${product.price}"></td>
-                <!-- TODO once I have sorted out a list, needs quantity and be able to calculate total via quantity * price -->
-                <td th:text="${product.name}"></td>
-                <td th:text="${product.name}"></td>
-            </tr>
-        </table>
-    </div>
+
 
 </body>
 </html>

@@ -29,7 +29,7 @@ td {
 #cart {
     background-color: red;
     position: absolute;
-    justify-content: end;
+    align-self: end;
 }
 
 #cart table {
