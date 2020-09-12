@@ -28,8 +28,7 @@ td {
 
 #cart {
     background-color: red;
-    position: absolute;
-    align-self: end;
+    position: center;
 }
 
 #cart table {
