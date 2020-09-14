@@ -6,6 +6,7 @@ import com.example.demo.repository.IUserRepository;
 import com.example.demo.repository.IProductRepository;
 import com.example.demo.repository.ProductArraylistRepository;
 import com.example.demo.repository.UserArraylistRepository;
+import org.apache.catalina.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -94,8 +95,9 @@ public class HomeController {
     }
 
     @GetMapping("/logout")
-    public String logout() {
+    public String logout(HttpSession session) {
         //TODO 'reset' a session
+        session.removeAttribute("user");
         return "login";
     }
 
