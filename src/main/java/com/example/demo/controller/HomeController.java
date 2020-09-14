@@ -5,7 +5,6 @@ import com.example.demo.repository.IUserRepository;
 import com.example.demo.repository.IProductRepository;
 import com.example.demo.repository.ProductArraylistRepository;
 import com.example.demo.repository.UserArraylistRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,19 +53,22 @@ public class HomeController {
     public String checkCredentials(HttpSession session, Model model, @ModelAttribute User user) {
         //Checks whether a username is in the database, if yes, then checks password for that username
         User u = iur.read(user.getUsername());
-
-        System.out.println(u.getPassword());
-        System.out.println(u.getUsername());
         if (u != null) {
             //Check users password against usernames' password
             if (user.getPassword().equals(u.getPassword())) {
                 //If successful, set session attribute and redirect to index
+                //TODO add "setup" part where a productList is created from items in DB
                 session.setAttribute("user", u);
                 return "redirect:/";
             }
         }
         //If everything fails, user being null OR password being wrong, return login page
         return "login";
+    }
+
+    @GetMapping("/addProductToCart/id")
+    public String addProductToCart(HttpSession session) {
+        return "redirect:/";
     }
 
 }

@@ -11,6 +11,8 @@ public class User {
         this.password = password;
     }
 
+
+    //Getters & Setters
     public String getUsername() {
         return username;
     }
