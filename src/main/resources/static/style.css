@@ -4,6 +4,7 @@ tr:nth-of-type(even) {
 
 th {
     text-align: center;
+    font-size: 2.1em;
 }
 
 td {
@@ -27,6 +28,7 @@ td {
 }
 
 #cart {
+    padding-right: 2.5%;
     background-color: rgb(245, 245, 245);
     position: center;
 }

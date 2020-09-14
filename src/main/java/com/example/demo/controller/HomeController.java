@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Cart;
+import com.example.demo.model.Product;
 import com.example.demo.model.User;
 import com.example.demo.repository.IUserRepository;
 import com.example.demo.repository.IProductRepository;
@@ -11,12 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 @Controller
 public class HomeController {
 
-    IProductRepository ipr;
+    ProductArraylistRepository ipr;
     IUserRepository iur;
     User user;
 
@@ -76,6 +79,24 @@ public class HomeController {
         //TODO Add a product to cart via product ID
         this.user.addToCart(ipr.findProductInDB(id));
         return "redirect:/";
+    }
+
+    @GetMapping("/createProduct")
+    public String createProduct() {
+        return "createProduct";
+    }
+
+    @PostMapping("/createProduct")
+    public String createProductAction(@RequestParam("name") String name, @RequestParam("price") double price, @RequestParam("image") String image) {
+        int id = ipr.getProductCount() + 1;
+        ipr.create(new Product(name, image, id, price));
+        return "createProduct";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        //TODO 'reset' a session
+        return "login";
     }
 
 }
