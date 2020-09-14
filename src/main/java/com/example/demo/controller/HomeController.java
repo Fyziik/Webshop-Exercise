@@ -7,10 +7,7 @@ import com.example.demo.repository.ProductArraylistRepository;
 import com.example.demo.repository.UserArraylistRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,6 +36,8 @@ public class HomeController {
         else {
             model.addAttribute("products", ipr.read((String)session.getAttribute("isSearching")));
         }
+        //Load the users current cart
+        //model.addAttribute("cart", );
         return "index";
     }
 
@@ -66,8 +65,11 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping("/addProductToCart/id")
-    public String addProductToCart(HttpSession session) {
+    @PostMapping("/addProductToCart/{id}")
+    public String addProductToCart(HttpSession session, @PathVariable int id) {
+        //TODO Add a product to cart via product ID
+        System.out.println(ipr.findProductInDB(id).getName());
+        System.out.println(id);
         return "redirect:/";
     }
 

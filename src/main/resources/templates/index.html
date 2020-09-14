@@ -30,14 +30,12 @@
                         <th>Price</th>
                     </tr>
                     <tr style="border: black solid 2px" th:each="product : ${products}" class="tableBackground">
-                        <form th:action="addProductToCart" method="post">
+                        <form th:action="${'addProductToCart/'} + ${product.ID}" method="post">
                             <td class="fixTd"><img  class="fixImage" th:block th:src="${product.image}"></img></td>
                             <td th:text="${product.name}"></td>
                             <td class="fixIDTd" th:text="${product.ID}"></td>
                             <td th:text="${product.price}"></td>
-                            <!-- I've no idea how to send information to the backend, which item was 'added' -->
                             <td><button class="btn btn-primary btn-lg">Add to cart</button></td>
-                            <td><a href="/addProductToCart/${product.ID}"></a></td>
                         </form>
                     </tr>
                 </table>

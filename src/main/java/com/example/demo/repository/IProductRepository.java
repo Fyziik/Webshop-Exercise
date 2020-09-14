@@ -11,4 +11,6 @@ public interface IProductRepository {
     List<Product> read(String email);
 
     List<Product> readAll();
+
+    Product findProductInDB(int id);
 }

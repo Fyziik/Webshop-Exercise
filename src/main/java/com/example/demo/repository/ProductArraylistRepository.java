@@ -16,7 +16,6 @@ public class ProductArraylistRepository implements IProductRepository {
         this.products.add(new Product("Kiwi", "/images/kiwi.png", 2, 500));
         this.products.add(new Product("Pear", "/images/pear.png", 3, 15));
         this.products.add(new Product("Apple", "/images/apple.png", 1, 5));
-        ProductList test = new ProductList(this.products);
     }
 
     @Override
@@ -34,6 +33,15 @@ public class ProductArraylistRepository implements IProductRepository {
             }
         }
         return tmp;
+    }
+
+    public Product findProductInDB(int id) {
+        for (Product product : products) {
+            if (product.getID() == id) {
+                return product;
+            }
+        }
+        return null;
     }
 
     @Override
