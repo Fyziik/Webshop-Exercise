@@ -22,7 +22,7 @@ public class Cart {
 
         for (Product product : list) {
 
-            //If product is in cart
+            //If product isnt in cart, add it to the cart
             if (!tmp.containsKey(product)) {
                 tmp.put(product, 1);
             }
