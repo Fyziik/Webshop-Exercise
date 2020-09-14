@@ -54,7 +54,7 @@
                         <td th:text="${item.key.price}"></td>
                         <!-- TODO once I have sorted out a list, needs quantity and be able to calculate total via quantity * price -->
                         <td th:text="${item.value}"></td>
-                        <td th:text="${item.key.price}"></td>
+                        <td th:text="${item.key.price * item.value}"></td>
                     </tr>
                     <td></td>
                     <td></td>
