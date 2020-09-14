@@ -33,6 +33,7 @@ td {
     position: center;
 }
 
-#cart table {
+#cart th {
+    font-size: 1.2em;
 
 }
