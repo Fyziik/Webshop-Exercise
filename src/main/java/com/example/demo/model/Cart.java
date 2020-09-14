@@ -37,15 +37,28 @@ public class Cart {
         return tmp;
     }
 
+    public boolean addToCart(Product product) {
+        if (!cart.containsKey(product)) {
+            cart.put(product, 1);
+        }
+        //Else find product, and increase amount
+        else {
+            int amount = cart.get(product) + 1;
+            cart.replace(product, amount);
+        }
+        return true;
+    }
+
 
     //Getters & Setters
     public HashMap<Product, Integer> getCart() {
         return cart;
     }
 
-    public String printList(HashMap<Product, Integer> list) {
-        System.out.println(this.cart.keySet());
-        System.out.println(this.cart.values());
-        return null;
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "cart=" + cart +
+                '}';
     }
 }

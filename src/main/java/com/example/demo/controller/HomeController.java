@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Cart;
 import com.example.demo.model.User;
 import com.example.demo.repository.IUserRepository;
 import com.example.demo.repository.IProductRepository;
@@ -10,12 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Controller
 public class HomeController {
 
     IProductRepository ipr;
     IUserRepository iur;
+    User user;
 
     public HomeController() {
         //Have to instantiate objects of repos myself, @Autowired seems to only instantiate 1 of the repos
@@ -37,7 +40,9 @@ public class HomeController {
             model.addAttribute("products", ipr.read((String)session.getAttribute("isSearching")));
         }
         //Load the users current cart
-        //model.addAttribute("cart", );
+        model.addAttribute("cart", user.getCart().getCart());
+        //Show the total amount for all items
+        model.addAttribute("total", user.getTotal());
         return "index";
     }
 
@@ -51,13 +56,14 @@ public class HomeController {
     @PostMapping("/checkCredentials")
     public String checkCredentials(HttpSession session, Model model, @ModelAttribute User user) {
         //Checks whether a username is in the database, if yes, then checks password for that username
-        User u = iur.read(user.getUsername());
-        if (u != null) {
+        this.user = iur.read(user.getUsername());
+        if (this.user != null) {
             //Check users password against usernames' password
-            if (user.getPassword().equals(u.getPassword())) {
+            if (user.getPassword().equals(this.user.getPassword())) {
                 //If successful, set session attribute and redirect to index
                 //TODO add "setup" part where a productList is created from items in DB
-                session.setAttribute("user", u);
+                //this.userCart = new Cart((ArrayList)ipr.readAll());
+                session.setAttribute("user", this.user);
                 return "redirect:/";
             }
         }
@@ -68,8 +74,7 @@ public class HomeController {
     @PostMapping("/addProductToCart/{id}")
     public String addProductToCart(HttpSession session, @PathVariable int id) {
         //TODO Add a product to cart via product ID
-        System.out.println(ipr.findProductInDB(id).getName());
-        System.out.println(id);
+        this.user.addToCart(ipr.findProductInDB(id));
         return "redirect:/";
     }
 

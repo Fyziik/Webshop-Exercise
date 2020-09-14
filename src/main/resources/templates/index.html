@@ -50,12 +50,17 @@
                     <th>quantity</th>
                     <th>total</th>
                     <tr style="border: black solid 1px" th:each="item : ${cart}">
-                        <td th:text="${product.name}"></td>
-                        <td th:text="${product.price}"></td>
+                        <td th:text="${item.key.name}"></td>
+                        <td th:text="${item.key.price}"></td>
                         <!-- TODO once I have sorted out a list, needs quantity and be able to calculate total via quantity * price -->
-                        <td th:text="${product.name}"></td>
-                        <td th:text="${product.name}"></td>
+                        <td th:text="${item.value}"></td>
+                        <td th:text="${item.key.price}"></td>
                     </tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Grand total: </td>
+                    <td th:text="${total}"></td>
                 </table>
             </div>
 

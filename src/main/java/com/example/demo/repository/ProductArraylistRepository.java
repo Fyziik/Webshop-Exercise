@@ -15,7 +15,6 @@ public class ProductArraylistRepository implements IProductRepository {
         this.products.add(new Product("Kiwi", "/images/kiwi.png", 2, 500));
         this.products.add(new Product("Pear", "/images/pear.png", 3, 15));
         this.products.add(new Product("Apple", "/images/apple.png", 1, 5));
-        Cart cart = new Cart(this.products);
     }
 
     @Override
