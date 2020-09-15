@@ -1,8 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.repository.ProductArraylistRepository;
-
-import java.util.ArrayList;
 import java.util.Map;
 
 public class User {
@@ -19,9 +16,10 @@ public class User {
     }
 
     private void retrieveCart(String username) {
-        //TODO remake method so that it retrieves products from DB via username, instead of from arraylist
-        ProductArraylistRepository par = new ProductArraylistRepository();
-        this.cart = new Cart((ArrayList)par.readAll());
+        //TODO remake method so that it retrieves products from DB via username / ID for a username, instead of from arraylist
+        //ProductArraylistRepository par = new ProductArraylistRepository();
+        //this.cart = new Cart((ArrayList)par.readAll());
+        this.cart = new Cart();
     }
 
     //Getters & Setters

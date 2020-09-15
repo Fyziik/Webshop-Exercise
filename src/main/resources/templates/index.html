@@ -15,7 +15,6 @@
         </form>
         <a href="/createProduct"><button class="btn btn-info my-2 my-sm-0" type="submit">Create new product</button></a>
         <a href="/logout"><button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button></a>
-        <!-- TODO add login & signup to the right side of the navbar -->
     </nav>
 
 
@@ -54,7 +53,6 @@
                     <tr style="border: black solid 1px" th:each="item : ${cart}">
                         <td th:text="${item.key.name}"></td>
                         <td th:text="${item.key.price}"></td>
-                        <!-- TODO once I have sorted out a list, needs quantity and be able to calculate total via quantity * price -->
                         <td th:text="${item.value}"></td>
                         <td th:text="${item.key.price * item.value}"></td>
                     </tr>

@@ -16,6 +16,12 @@ public class Product {
         this.price = price;
     }
 
+    public Product(String name, String image, double price) {
+        this.name = name;
+        this.image = image;
+        this.price = price;
+    }
+
 
     //Getters & Setters
     public String getName() {

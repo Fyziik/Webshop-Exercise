@@ -6,6 +6,7 @@ import com.example.demo.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
+//Isnt used anymore, but COULD be used for testing purposes
 public class ProductArraylistRepository implements IProductRepository {
 
     ArrayList<Product> products = new ArrayList<>();

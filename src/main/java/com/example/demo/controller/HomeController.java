@@ -2,11 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Product;
 import com.example.demo.model.User;
-import com.example.demo.repository.IUserRepository;
-import com.example.demo.repository.IProductRepository;
-import com.example.demo.repository.ProductArraylistRepository;
-import com.example.demo.repository.UserArraylistRepository;
+import com.example.demo.repository.*;
 import org.apache.catalina.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +18,15 @@ import java.io.IOException;
 @Controller
 public class HomeController {
 
-    ProductArraylistRepository ipr;
+    @Autowired
+    IProductRepository pDB;
+
     IUserRepository iur;
     User user;
 
     public HomeController() {
         //Have to instantiate objects of repos myself, @Autowired seems to only instantiate 1 of the repos
-        this.ipr = new ProductArraylistRepository();
+        //this.pDB = new ProductDBRepository();
         this.iur = new UserArraylistRepository();
     }
 
@@ -38,10 +38,10 @@ public class HomeController {
         }
         //Load all available products when first visiting
         if (session.getAttribute("isSearching") == null) {
-            model.addAttribute("products", ipr.readAll());
+            model.addAttribute("products", pDB.readAll());
         }
         else {
-            model.addAttribute("products", ipr.read((String)session.getAttribute("isSearching")));
+            model.addAttribute("products", pDB.read((String)session.getAttribute("isSearching")));
         }
         //Load the users current cart
         model.addAttribute("cart", user.getCart().getCart());
@@ -61,12 +61,11 @@ public class HomeController {
     public String checkCredentials(HttpSession session, Model model, @ModelAttribute User user) {
         //Checks whether a username is in the database, if yes, then checks password for that username
         this.user = iur.read(user.getUsername());
+
         if (this.user != null) {
             //Check users password against usernames' password
             if (user.getPassword().equals(this.user.getPassword())) {
                 //If successful, set session attribute and redirect to index
-                //TODO add "setup" part where a productList is created from items in DB
-                //this.userCart = new Cart((ArrayList)ipr.readAll());
                 session.setAttribute("user", this.user);
                 return "redirect:/";
             }
@@ -77,8 +76,9 @@ public class HomeController {
 
     @PostMapping("/addProductToCart/{id}")
     public String addProductToCart(HttpSession session, @PathVariable int id) {
-        //TODO Add a product to cart via product ID
-        this.user.addToCart(ipr.findProductInDB(id));
+        // Add a product to cart via product ID
+        this.user.addToCart(pDB.findProductInDB(id));
+        // TODO Once added to a users cart, an ID should be connected to the users ID in the DB
         return "redirect:/";
     }
 
@@ -89,8 +89,7 @@ public class HomeController {
 
     @PostMapping("/createProduct")
     public String createProductAction(@RequestParam("name") String name, @RequestParam("price") double price, @RequestParam("image") String image) {
-        int id = ipr.getProductCount() + 1;
-        ipr.create(new Product(name, image, id, price));
+        pDB.create(new Product(name, image, price));
         return "createProduct";
     }
 
