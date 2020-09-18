@@ -49,6 +49,18 @@ public class Cart {
         return true;
     }
 
+    public boolean removeFromCart(Product product) {
+        if (cart.get(product) == 1) {
+            cart.remove(product);
+        }
+        //Else find product, and increase amount
+        else {
+            int amount = cart.get(product) - 1;
+            cart.replace(product, amount);
+        }
+        return true;
+    }
+
 
     //Getters & Setters
     public HashMap<Product, Integer> getCart() {

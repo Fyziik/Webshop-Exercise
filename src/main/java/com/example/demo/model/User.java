@@ -68,4 +68,8 @@ public class User {
     public boolean addToCart(Product product) {
         return this.cart.addToCart(product);
     }
+
+    public boolean removeFromCart(Product product) {
+        return this.cart.removeFromCart(product);
+    }
 }

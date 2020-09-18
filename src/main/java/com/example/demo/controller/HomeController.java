@@ -79,6 +79,12 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @PostMapping("/removeProductFromCart/{id}")
+    public String removeProductFromCart(HttpSession session, @PathVariable int id) {
+        this.user.removeFromCart(pDB.findProductInDB(id));
+        return "redirect:/";
+    }
+
     @GetMapping("/createProduct")
     public String createProduct() {
         return "createProduct";

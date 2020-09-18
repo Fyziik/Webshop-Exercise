@@ -55,6 +55,9 @@
                         <td th:text="${item.key.price}"></td>
                         <td th:text="${item.value}"></td>
                         <td th:text="${item.key.price * item.value}"></td>
+                        <form th:action="${'removeProductFromCart/'} + ${item.key.ID}" method="post">
+                            <td><button class="btn btn-outline-danger btn-sm">X</button></td>
+                        </form>
                     </tr>
                     <td></td>
                     <td></td>
