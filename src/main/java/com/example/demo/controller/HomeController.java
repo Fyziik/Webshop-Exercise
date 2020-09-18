@@ -3,32 +3,29 @@ package com.example.demo.controller;
 import com.example.demo.model.Product;
 import com.example.demo.model.User;
 import com.example.demo.repository.*;
-import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 @Controller
 public class HomeController {
 
     @Autowired
-    IProductRepository pDB;
+    private IProductRepository pDB;
 
-    IUserRepository iur;
+    @Autowired
+    private IUserRepository uDB;
+
     User user;
 
-    public HomeController() {
-        //Have to instantiate objects of repos myself, @Autowired seems to only instantiate 1 of the repos
-        //this.pDB = new ProductDBRepository();
-        this.iur = new UserArraylistRepository();
-    }
+    /*public HomeController() {
+        this.pDB = new ProductDBRepository();
+        this.uDB = new UserDBRepository();
+    }*/
+
 
     @GetMapping("/")
     public String index(HttpSession session, Model model) {
@@ -60,7 +57,7 @@ public class HomeController {
     @PostMapping("/checkCredentials")
     public String checkCredentials(HttpSession session, Model model, @ModelAttribute User user) {
         //Checks whether a username is in the database, if yes, then checks password for that username
-        this.user = iur.read(user.getUsername());
+        this.user = uDB.read(user.getUsername());
 
         if (this.user != null) {
             //Check users password against usernames' password

@@ -13,8 +13,9 @@ import java.util.List;
 public class ProductDBRepository implements IProductRepository {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
-    SqlRowSet sqlRowSet;
+    private JdbcTemplate jdbcTemplate;
+
+    private SqlRowSet sqlRowSet;
 
 
     @Override
