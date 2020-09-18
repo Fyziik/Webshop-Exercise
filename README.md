@@ -7,3 +7,7 @@ Lav en webshop hvor der vises et par produkter og hvor det selvfølgeligt er mul
 
 ### Før brug
 Før dette webshop kan anvendes, skal der oprettes en database ved navn 'webshop' med et 'product' table i sig, hvori man har ID (primary key), name (varchar(45)), image(varchar(500)) og price(double). Hertil skal connectionen i application.properties rettes til i forhold til ens lokale MySQL database.
+
+Herudover skal der også oprettes endnu et table i samme database ved navn 'user', som indeholder et ID (primary key), username(varchar(45)), og password(varchar(45)).
+
+Jeg laver (potentielt) et DB setup script på et senere tidspunkt
