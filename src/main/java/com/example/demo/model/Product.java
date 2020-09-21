@@ -78,6 +78,10 @@ public class Product {
         this.catagory = catagory;
     }
 
+    public boolean validate(String keyword) {
+        return this.name.toLowerCase().contains(keyword.toLowerCase());
+    }
+
     @Override
     public String toString() {
         return "Product{" +

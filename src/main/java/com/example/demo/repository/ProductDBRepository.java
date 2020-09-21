@@ -64,17 +64,21 @@ public class ProductDBRepository implements IProductRepository {
         while (sqlRowSet.next()) {
             tmp.add(load(sqlRowSet));
         }
-        mixList(tmp);
-        ArrayList<Product> list = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            list.add(tmp.get(i));
-        }
-        return list;
+        Collections.shuffle(tmp);
+        return tmp;
     }
 
-    private List<Product> mixList(List<Product> list) {
-        Collections.shuffle(list);
-        return list;
+    public List<Product> search(String keyword, String catagory) {
+        ArrayList<Product> tmp = new ArrayList<>();
+        List<Product> allProducts = readAll();
+
+        for (Product product : allProducts) {
+            if (product.validate(keyword) && product.getCatagory().equals(catagory)) {
+                tmp.add(product);
+            }
+        }
+
+        return tmp;
     }
 
     @Override

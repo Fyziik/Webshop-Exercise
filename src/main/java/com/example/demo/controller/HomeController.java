@@ -36,6 +36,8 @@ public class HomeController {
         }
         else {
             model.addAttribute("products", pDB.read((String)session.getAttribute("isSearching")));
+            model.addAttribute("electronics", pDB.search((String)session.getAttribute("isSearching"), "Electronic"));
+            model.addAttribute("fruits", pDB.search((String)session.getAttribute("isSearching"), "Fruit"));
         }
         //Load the users current cart
         model.addAttribute("cart", user.getCart().getCart());

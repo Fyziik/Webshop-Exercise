@@ -45,6 +45,11 @@ public class ProductArraylistRepository implements IProductRepository {
     }
 
     @Override
+    public List<Product> search(String keyword, String catagory) {
+        return null;
+    }
+
+    @Override
     public List<Product> readAll() {
         return this.products;
     }

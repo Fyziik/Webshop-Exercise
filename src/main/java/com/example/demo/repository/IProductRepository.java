@@ -16,4 +16,6 @@ public interface IProductRepository {
     List<Product> readCatagory(String keyword);
 
     Product findProductInDB(int id);
+
+    List<Product> search(String keyword, String catagory);
 }
