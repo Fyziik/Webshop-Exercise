@@ -18,12 +18,23 @@
     </nav>
 
     <!-- Display content for a product -->
-    <div class="jumbotron container">
+    <div class="jumbotron container" style="margin-top: 2.5%">
         <div>
             <h1 th:text="${product.name}"></h1>
         </div>
         <div>
             <img  class="fixImage" th:block th:src="${product.image}"></img>
+        </div>
+        <div>
+            <h3>Description: <span th:text="${product.description}"></span></h3>
+        </div>
+        <div>
+            <h2>Price: <span th:text="${product.price}"></span></h2>
+        </div>
+        <div>
+            <form th:action="${'addProductToCart/'} + ${product.ID}" method="post">
+                <button class="btn btn-primary btn-lg">Add to cart</button>
+            </form>
         </div>
     </div>
 

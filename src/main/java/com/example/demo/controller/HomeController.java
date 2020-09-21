@@ -24,12 +24,15 @@ public class HomeController {
     @GetMapping("/")
     public String index(HttpSession session, Model model) {
         //Check if user is logged in
+        //Out comment next 3 lines and remove session when login should be re-activated
         if (session.getAttribute("user") == null) {
             return "login";
         }
         //Load all available products when first visiting
         if (session.getAttribute("isSearching") == null) {
             model.addAttribute("products", pDB.readAll());
+            model.addAttribute("electronics", pDB.readCatagory("Electronic"));
+            model.addAttribute("fruits", pDB.readCatagory("Fruit"));
         }
         else {
             model.addAttribute("products", pDB.read((String)session.getAttribute("isSearching")));
@@ -65,9 +68,7 @@ public class HomeController {
         return "login";
     }
 
-    //TEST
-
-    @PostMapping("/addProductToCart/{id}")
+    @PostMapping("viewProduct/addProductToCart/{id}")
     public String addProductToCart(HttpSession session, @PathVariable int id) {
         // Add a product to cart via product ID
         this.user.addToCart(pDB.findProductInDB(id));
@@ -93,8 +94,9 @@ public class HomeController {
     }
 
     @PostMapping("/createProduct")
-    public String createProductAction(@RequestParam("name") String name, @RequestParam("price") double price, @RequestParam("image") String image) {
-        pDB.create(new Product(name, image, price));
+    public String createProductAction(@RequestParam("name") String name, @RequestParam("price") double price, @RequestParam("image") String image,
+                                      @RequestParam("description") String description, @RequestParam("catagory") String catagory) {
+        pDB.create(new Product(name, image, price, description, catagory));
         return "createProduct";
     }
 

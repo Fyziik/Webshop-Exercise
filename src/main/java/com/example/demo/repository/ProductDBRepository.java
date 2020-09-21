@@ -24,20 +24,33 @@ public class ProductDBRepository implements IProductRepository {
         String name = product.getName();
         String image = product.getImage();
         double price = product.getPrice();
-        String sql = "INSERT INTO product (name, image, price) VALUES ('" + name + "','" + image + "','" + price + "')";
+        String desc = product.getDescription();
+        String catagory = product.getCatagory();
+        String sql = "INSERT INTO product (name, image, price, description, catagory) VALUES ('" + name + "','" + image + "','" + price + "','" + desc + "','" + catagory + "')";
         jdbcTemplate.execute(sql);
         return true;
     }
 
     @Override
+    //'Search' method
     public List<Product> read(String keyword) {
         String sql = "SELECT * FROM product WHERE name LIKE '%" + keyword + "%'";
         sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
         ArrayList<Product> tmp = new ArrayList<>();
         while (sqlRowSet.next()) {
-            tmp.add(new Product(sqlRowSet.getString("name" ), sqlRowSet.getString("image"),
-                    sqlRowSet.getInt("ID"), sqlRowSet.getDouble("price")));
+            tmp.add(load(sqlRowSet));
+        }
+        return tmp;
+    }
+
+    public List<Product> readCatagory(String keyword) {
+        String sql = "SELECT * FROM product WHERE catagory LIKE '%" + keyword + "%'";
+        sqlRowSet = jdbcTemplate.queryForRowSet(sql);
+
+        ArrayList<Product> tmp = new ArrayList<>();
+        while (sqlRowSet.next()) {
+            tmp.add(load(sqlRowSet));
         }
         return tmp;
     }
@@ -49,14 +62,17 @@ public class ProductDBRepository implements IProductRepository {
 
         ArrayList<Product> tmp = new ArrayList<>();
         while (sqlRowSet.next()) {
-            tmp.add(new Product(sqlRowSet.getString("name" ), sqlRowSet.getString("image"),
-                    sqlRowSet.getInt("ID"), sqlRowSet.getDouble("price")));
+            tmp.add(load(sqlRowSet));
         }
         mixList(tmp);
-        return tmp;
+        ArrayList<Product> list = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            list.add(tmp.get(i));
+        }
+        return list;
     }
 
-    public List<Product> mixList(List<Product> list) {
+    private List<Product> mixList(List<Product> list) {
         Collections.shuffle(list);
         return list;
     }
@@ -67,13 +83,19 @@ public class ProductDBRepository implements IProductRepository {
         sqlRowSet = jdbcTemplate.queryForRowSet(sql);
 
         if (sqlRowSet.next()) {
-            return new Product(
-              sqlRowSet.getString("name"),
-              sqlRowSet.getString("image"),
-              sqlRowSet.getInt("ID"),
-              sqlRowSet.getDouble("price")
-            );
+            return load(sqlRowSet);
         }
         return null;
+    }
+
+    private Product load(SqlRowSet rs) {
+        return new Product(
+                rs.getString("name"),
+                rs.getString("image"),
+                rs.getInt("ID"),
+                rs.getDouble("price"),
+                rs.getString("description"),
+                rs.getString("catagory")
+        );
     }
 }

@@ -12,9 +12,9 @@ public class ProductArraylistRepository implements IProductRepository {
     ArrayList<Product> products = new ArrayList<>();
 
     public ProductArraylistRepository() {
-        this.products.add(new Product("Apple", "/images/apple.png", 1, 5));
-        this.products.add(new Product("Kiwi", "/images/kiwi.png", 2, 500));
-        this.products.add(new Product("Pear", "/images/pear.png", 3, 15));
+        this.products.add(new Product("Apple", "/images/apple.png", 1, 5, "test", "test"));
+        this.products.add(new Product("Kiwi", "/images/kiwi.png", 2, 500, "test", "test"));
+        this.products.add(new Product("Pear", "/images/pear.png", 3, 15, "test", "test"));
     }
 
     @Override
@@ -47,6 +47,11 @@ public class ProductArraylistRepository implements IProductRepository {
     @Override
     public List<Product> readAll() {
         return this.products;
+    }
+
+    @Override
+    public List<Product> readCatagory(String keyword) {
+        return null;
     }
 
     public int getProductCount() {

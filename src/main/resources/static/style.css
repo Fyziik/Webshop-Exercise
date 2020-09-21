@@ -1,16 +1,22 @@
+body {
+    background: #6190E8;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #A7BFE8, #6190E8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 tr:nth-of-type(even) {
     background-color: rgb(204, 204, 204);
 }
 
 th {
     text-align: center;
-    font-size: 2.1em;
+    font-size: 1.75em;
 }
 
 td {
     border-left: black solid 1.5px;
     border-right: black solid 1.5px;
-    font-size: 2em;
+    font-size: 1.25em;
     text-align: center;
 }
 
@@ -29,6 +35,12 @@ td {
 
 .fixIDTd {
     width: 10%;
+}
+
+.listHeader {
+    border-bottom: black 1px solid;
+    margin-top: 2.5%;
+    margin-bottom: 1%;
 }
 
 #cart {

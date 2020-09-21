@@ -13,5 +13,7 @@ public interface IProductRepository {
 
     List<Product> readAll();
 
+    List<Product> readCatagory(String keyword);
+
     Product findProductInDB(int id);
 }
