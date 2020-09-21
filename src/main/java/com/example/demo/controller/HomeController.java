@@ -71,6 +71,8 @@ public class HomeController {
         return "login";
     }
 
+    //TEST
+
     @PostMapping("/addProductToCart/{id}")
     public String addProductToCart(HttpSession session, @PathVariable int id) {
         // Add a product to cart via product ID
