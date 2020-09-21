@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline" method="post" action="/search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <a href="/createProduct"><button class="btn btn-info my-2 my-sm-0" type="submit">Create new product</button></a>
+        <a href="/logout"><button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button></a>
+    </nav>
+
+
+    <div class="jumbotron">
+        <table class="w-100">
+            <tr style="border: black solid 2px;" th:each="product : ${products}" class="tableBackground">
+                <form th:action="${'viewProduct/'} + ${product.ID}" method="post">
+                    <button id="displayedItems">
+                        <img  class="fixImage" th:block th:src="${product.image}"></img>
+                    </button>
+                </form>
+            </tr>
+        </table>
+    </div>
+
+    <div class="jumbotron">
+        <h1>Electronics</h1>
+
+        <h1>Fruits</h1>
+
+        <h1>Recommended for you</h1>
+
+    </div>
+
+
+
+
+</body>
+</html>

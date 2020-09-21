@@ -7,6 +7,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -51,7 +52,13 @@ public class ProductDBRepository implements IProductRepository {
             tmp.add(new Product(sqlRowSet.getString("name" ), sqlRowSet.getString("image"),
                     sqlRowSet.getInt("ID"), sqlRowSet.getDouble("price")));
         }
+        mixList(tmp);
         return tmp;
+    }
+
+    public List<Product> mixList(List<Product> list) {
+        Collections.shuffle(list);
+        return list;
     }
 
     @Override

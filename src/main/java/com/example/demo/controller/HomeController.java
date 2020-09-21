@@ -21,12 +21,6 @@ public class HomeController {
 
     User user;
 
-    /*public HomeController() {
-        this.pDB = new ProductDBRepository();
-        this.uDB = new UserDBRepository();
-    }*/
-
-
     @GetMapping("/")
     public String index(HttpSession session, Model model) {
         //Check if user is logged in
@@ -44,7 +38,7 @@ public class HomeController {
         model.addAttribute("cart", user.getCart().getCart());
         //Show the total amount for all items
         model.addAttribute("total", user.getTotal());
-        return "index";
+        return "productList";
     }
 
     @PostMapping("/search")
@@ -85,6 +79,12 @@ public class HomeController {
     public String removeProductFromCart(HttpSession session, @PathVariable int id) {
         this.user.removeFromCart(pDB.findProductInDB(id));
         return "redirect:/";
+    }
+
+    @PostMapping("/viewProduct/{id}")
+    public String viewProduct(HttpSession session, @PathVariable int id, Model model) {
+        model.addAttribute("product", pDB.findProductInDB(id));
+        return "product";
     }
 
     @GetMapping("/createProduct")
