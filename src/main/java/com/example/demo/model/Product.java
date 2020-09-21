@@ -8,18 +8,24 @@ public class Product {
     private String image;
     private int ID;
     private double price;
+    private String description;
+    private String catagory;
 
-    public Product(String name, String image, int ID, double price) {
+    public Product(String name, String image, int ID, double price, String description, String catagory) {
         this.name = name;
         this.image = image;
         this.ID = ID;
         this.price = price;
+        this.description = description;
+        this.catagory = catagory;
     }
 
-    public Product(String name, String image, double price) {
+    public Product(String name, String image, double price, String description, String catagory) {
         this.name = name;
         this.image = image;
         this.price = price;
+        this.description = description;
+        this.catagory = catagory;
     }
 
 
@@ -54,6 +60,26 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCatagory() {
+        return catagory;
+    }
+
+    public void setCatagory(String catagory) {
+        this.catagory = catagory;
+    }
+
+    public boolean validate(String keyword) {
+        return this.name.toLowerCase().contains(keyword.toLowerCase());
     }
 
     @Override

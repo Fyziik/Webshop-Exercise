@@ -21,30 +21,29 @@ public class HomeController {
 
     User user;
 
-    /*public HomeController() {
-        this.pDB = new ProductDBRepository();
-        this.uDB = new UserDBRepository();
-    }*/
-
-
     @GetMapping("/")
     public String index(HttpSession session, Model model) {
         //Check if user is logged in
+        //Out comment next 3 lines and remove session when login should be re-activated
         if (session.getAttribute("user") == null) {
             return "login";
         }
         //Load all available products when first visiting
         if (session.getAttribute("isSearching") == null) {
             model.addAttribute("products", pDB.readAll());
+            model.addAttribute("electronics", pDB.readCatagory("Electronic"));
+            model.addAttribute("fruits", pDB.readCatagory("Fruit"));
         }
         else {
             model.addAttribute("products", pDB.read((String)session.getAttribute("isSearching")));
+            model.addAttribute("electronics", pDB.search((String)session.getAttribute("isSearching"), "Electronic"));
+            model.addAttribute("fruits", pDB.search((String)session.getAttribute("isSearching"), "Fruit"));
         }
         //Load the users current cart
         model.addAttribute("cart", user.getCart().getCart());
         //Show the total amount for all items
         model.addAttribute("total", user.getTotal());
-        return "index";
+        return "productList";
     }
 
     @PostMapping("/search")
@@ -71,7 +70,7 @@ public class HomeController {
         return "login";
     }
 
-    @PostMapping("/addProductToCart/{id}")
+    @PostMapping("viewProduct/addProductToCart/{id}")
     public String addProductToCart(HttpSession session, @PathVariable int id) {
         // Add a product to cart via product ID
         this.user.addToCart(pDB.findProductInDB(id));
@@ -85,14 +84,21 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @PostMapping("/viewProduct/{id}")
+    public String viewProduct(HttpSession session, @PathVariable int id, Model model) {
+        model.addAttribute("product", pDB.findProductInDB(id));
+        return "product";
+    }
+
     @GetMapping("/createProduct")
     public String createProduct() {
         return "createProduct";
     }
 
     @PostMapping("/createProduct")
-    public String createProductAction(@RequestParam("name") String name, @RequestParam("price") double price, @RequestParam("image") String image) {
-        pDB.create(new Product(name, image, price));
+    public String createProductAction(@RequestParam("name") String name, @RequestParam("price") double price, @RequestParam("image") String image,
+                                      @RequestParam("description") String description, @RequestParam("catagory") String catagory) {
+        pDB.create(new Product(name, image, price, description, catagory));
         return "createProduct";
     }
 
