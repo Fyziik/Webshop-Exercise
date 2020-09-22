@@ -87,6 +87,8 @@ public class HomeController {
     @PostMapping("/viewProduct/{id}")
     public String viewProduct(HttpSession session, @PathVariable int id, Model model) {
         model.addAttribute("product", pDB.findProductInDB(id));
+        model.addAttribute("cart", user.getCart().getCart());
+        model.addAttribute("total", user.getTotal());
         return "product";
     }
 
