@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
@@ -15,17 +15,46 @@
         </form>
         <a href="/createProduct"><button class="btn btn-info my-2 my-sm-0" type="submit">Create new product</button></a>
         <a href="/logout"><button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button></a>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cart
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="margin-top: 10%">
+                <table>
+                    <th>Name</th>
+                    <th>price each</th>
+                    <th>quantity</th>
+                    <th>total</th>
+                    <tr style="border: black solid 1px" th:each="item : ${cart}">
+                        <td th:text="${item.key.name}"></td>
+                        <td th:text="${item.key.price}"></td>
+                        <td th:text="${item.value}"></td>
+                        <td th:text="${item.key.price * item.value}"></td>
+                        <form th:action="${'removeProductFromCart/'} + ${item.key.ID}" method="post">
+                            <td><button class="btn btn-outline-danger btn-sm">X</button></td>
+                        </form>
+                    </tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Grand total: </td>
+                    <td th:text="${total}"></td>
+                </table>
+            </div>
+        </div>
+
     </nav>
 
-    <div class="container-fluid" style="margin-top: 2.5%">
+    <div class="container-fluid" style="margin-top: 2.5%; margin-left: 10%">
         <div class="row">
             <div class="jumbotron col-8">
                 <div>
                     <h1 class="listHeader">Randomly selected items</h1>
                     <table class="w-100" style="display: block; overflow-x: auto; white-space: nowrap">
-                        <tr style="border: black solid 4px; margin-bottom: 5%" th:each="product : ${products}" class="tableBackground">
+                        <tr th:each="product : ${products}" class="tableBackground">
                             <form th:action="${'viewProduct/'} + ${product.ID}" method="post">
-                                <button id="displayedItems">
+                                <button id="displayedItems" style="margin-bottom: 2%">
                                     <img  class="fixImage" th:block th:src="${product.image}"></img>
                                 </button>
                             </form>
@@ -75,8 +104,8 @@
             </div>
 
             <!-- CART -->
-            <div class="col-3 offset-1">
-                <!-- Current shopping cart -->
+            <!-- <div class="sticky-top col-3 offset-1">
+                <!-- Current shopping cart
                 <div id="cart">
                     <h1>Cart</h1>
                     <table>
@@ -99,7 +128,7 @@
                         <td>Grand total: </td>
                         <td th:text="${total}"></td>
                     </table>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -107,4 +136,7 @@
 
 
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </html>

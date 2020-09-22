@@ -15,10 +15,38 @@
         </form>
         <a href="/createProduct"><button class="btn btn-info my-2 my-sm-0" type="submit">Create new product</button></a>
         <a href="/logout"><button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button></a>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cart
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <table>
+                    <th>Name</th>
+                    <th>price each</th>
+                    <th>quantity</th>
+                    <th>total</th>
+                    <tr style="border: black solid 1px" th:each="item : ${cart}">
+                        <td th:text="${item.key.name}"></td>
+                        <td th:text="${item.key.price}"></td>
+                        <td th:text="${item.value}"></td>
+                        <td th:text="${item.key.price * item.value}"></td>
+                        <form th:action="${'removeProductFromCart/'} + ${item.key.ID}" method="post">
+                            <td><button class="btn btn-outline-danger btn-sm">X</button></td>
+                        </form>
+                    </tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Grand total: </td>
+                    <td th:text="${total}"></td>
+                </table>
+            </div>
+        </div>
     </nav>
 
     <!-- Display content for a product -->
-    <div class="jumbotron container" style="margin-top: 2.5%">
+    <div class="jumbotron container" style="margin-top: 2.5%; margin-left: 10%">
         <div>
             <h1 th:text="${product.name}"></h1>
         </div>
@@ -42,4 +70,7 @@
 
 
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </html>

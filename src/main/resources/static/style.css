@@ -10,7 +10,8 @@ tr:nth-of-type(even) {
 
 th {
     text-align: center;
-    font-size: 1.75em;
+    font-size: 1.25em;
+    font-weight: bold;
 }
 
 td {
@@ -24,9 +25,13 @@ td {
     margin-right: 2.5%
 }
 
+.dropdown {
+
+}
+
 .fixImage {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
 }
 
 .fixTd {
