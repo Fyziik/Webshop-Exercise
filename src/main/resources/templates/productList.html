@@ -20,9 +20,9 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Cart
             </button>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="margin-top: 10%">
-                <table>
-                    <th>Name</th>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="margin-top: 10%; width: 400px">
+                <table class="text-center" style="width: 100%">
+                    <th>name</th>
                     <th>price each</th>
                     <th>quantity</th>
                     <th>total</th>
@@ -100,35 +100,6 @@
                         </tr>
                     </table>
                 </div>
-
-            </div>
-
-            <!-- CART -->
-            <!-- <div class="sticky-top col-3 offset-1">
-                <!-- Current shopping cart
-                <div id="cart">
-                    <h1>Cart</h1>
-                    <table>
-                        <th>Name</th>
-                        <th>price each</th>
-                        <th>quantity</th>
-                        <th>total</th>
-                        <tr style="border: black solid 1px" th:each="item : ${cart}">
-                            <td th:text="${item.key.name}"></td>
-                            <td th:text="${item.key.price}"></td>
-                            <td th:text="${item.value}"></td>
-                            <td th:text="${item.key.price * item.value}"></td>
-                            <form th:action="${'removeProductFromCart/'} + ${item.key.ID}" method="post">
-                                <td><button class="btn btn-outline-danger btn-sm">X</button></td>
-                            </form>
-                        </tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Grand total: </td>
-                        <td th:text="${total}"></td>
-                    </table>
-                </div> -->
             </div>
         </div>
     </div>
