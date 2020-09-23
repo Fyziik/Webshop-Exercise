@@ -26,6 +26,7 @@ public class HomeController {
         //Check if user is logged in
         //Out comment next 3 lines and remove session when login should be re-activated
         if (session.getAttribute("user") == null) {
+            uDB.setup();
             return "login";
         }
         //Load all available products when first visiting

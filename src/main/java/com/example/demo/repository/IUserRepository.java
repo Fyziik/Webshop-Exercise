@@ -13,4 +13,6 @@ public interface IUserRepository {
 
     List<User> readAll();
 
+    void setup();
+
 }
