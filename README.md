@@ -6,8 +6,4 @@ I denne øvelse er i meget velkomne til at arbejde sammen, men i skal dog hver i
 Lav en webshop hvor der vises et par produkter og hvor det selvfølgeligt er muligt at tilføje disse produkter til en indkøbskurv. Selve betalingsmuligheden er ikke så vigtig i denne sammenhæng, så den kan i udelade.
 
 ### Før brug
-Før dette webshop kan anvendes, skal der oprettes en database ved navn 'webshop' med et 'product' table i sig, hvori man har ID (primary key), name (varchar(45)), image(varchar(500)) og price(double). Hertil skal connectionen i application.properties rettes til i forhold til ens lokale MySQL database.
-
-Herudover skal der også oprettes endnu et table i samme database ved navn 'user', som indeholder et ID (primary key), username(varchar(45)), og password(varchar(45)).
-
-Jeg laver (potentielt) et DB setup script på et senere tidspunkt
+Inkluderer nu et automatisk DB setup med både initialisering af tables og lidt dummy data. Husk at slette "SetupHasBeenRun" filen i roden, hvis der ingen database findes. Man ved at DB'en ikke er korrekt sat op hvis man ikke kan logge ind med username: Test, password: Test
