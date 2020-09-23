@@ -39,4 +39,9 @@ public class UserArraylistRepository implements IUserRepository {
     public List<User> readAll() {
         return this.users;
     }
+
+    @Override
+    public void setup() {
+
+    }
 }

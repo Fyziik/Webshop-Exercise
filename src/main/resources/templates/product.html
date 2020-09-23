@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Product</title>
@@ -47,23 +47,37 @@
 
     <!-- Display content for a product -->
     <div class="jumbotron container" style="margin-top: 2.5%; margin-left: 10%">
-        <div>
-            <h1 th:text="${product.name}"></h1>
+        <div class="row">
+            <div class="col-8">
+                <div>
+                    <h1 style="border-bottom: black solid 1px" th:text="${product.name}"></h1>
+                </div>
+                <div>
+                    <img  style="width: 400px; height: 400px" th:block th:src="${product.image}"></img>
+                </div>
+                <div>
+                    <h3 style="margin-top: 2.5%">Description: <span th:text="${product.description}"></span></h3>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div>
+                    <h2 style="padding-top: 20%">Catagory: <span th:text="${product.catagory}"></span></h2>
+                    <h2>Price: <span th:text="${product.price}"></span></h2>
+                </div>
+                <div>
+                    <form th:action="${'addProductToCart/'} + ${product.ID}" method="post">
+                        <button class="btn btn-primary btn-lg" style="margin-left: 60%; margin-top: 95%">Add to cart</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
-        <div>
-            <img  class="fixImage" th:block th:src="${product.image}"></img>
-        </div>
-        <div>
-            <h3>Description: <span th:text="${product.description}"></span></h3>
-        </div>
-        <div>
-            <h2>Price: <span th:text="${product.price}"></span></h2>
-        </div>
-        <div>
-            <form th:action="${'addProductToCart/'} + ${product.ID}" method="post">
-                <button class="btn btn-primary btn-lg">Add to cart</button>
-            </form>
-        </div>
+
+
+
+
+
     </div>
 
 
