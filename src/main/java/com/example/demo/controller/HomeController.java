@@ -30,6 +30,7 @@ public class HomeController {
             return "login";
         }*/
         //Load all available products when first visiting
+        this.user = uDB.read("Test");
         if (session.getAttribute("isSearching") == null) {
             model.addAttribute("products", pDB.readAll());
             model.addAttribute("electronics", pDB.readCatagory("Electronic"));
