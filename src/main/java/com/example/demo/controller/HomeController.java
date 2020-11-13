@@ -25,10 +25,10 @@ public class HomeController {
     public String index(HttpSession session, Model model) {
         //Check if user is logged in
         //Out comment next 3 lines and remove session when login should be re-activated
-        if (session.getAttribute("user") == null) {
+        /*if (session.getAttribute("user") == null) {
             uDB.setup();
             return "login";
-        }
+        }*/
         //Load all available products when first visiting
         if (session.getAttribute("isSearching") == null) {
             model.addAttribute("products", pDB.readAll());
@@ -59,16 +59,16 @@ public class HomeController {
         //Checks whether a username is in the database, if yes, then checks password for that username
         this.user = uDB.read("Test");
 
-        if (this.user != null) {
+        //if (this.user != null) {
             //Check users password against usernames' password
-            if (user.getPassword().equals("Test")) {
+            //if (user.getPassword().equals("Test")) {
                 //If successful, set session attribute and redirect to index
                 session.setAttribute("user", this.user);
                 return "redirect:/";
-            }
-        }
+          //  }
+       // }
         //If everything fails, user being null OR password being wrong, return login page
-        return "login";
+        //return "login";
     }
 
     @PostMapping("viewProduct/addProductToCart/{id}")
