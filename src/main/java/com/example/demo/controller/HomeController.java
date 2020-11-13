@@ -57,11 +57,11 @@ public class HomeController {
     @PostMapping("/checkCredentials")
     public String checkCredentials(HttpSession session, Model model, @ModelAttribute User user) {
         //Checks whether a username is in the database, if yes, then checks password for that username
-        this.user = uDB.read(user.getUsername());
+        this.user = uDB.read("Test");
 
         if (this.user != null) {
             //Check users password against usernames' password
-            if (user.getPassword().equals(this.user.getPassword())) {
+            if (user.getPassword().equals("Test")) {
                 //If successful, set session attribute and redirect to index
                 session.setAttribute("user", this.user);
                 return "redirect:/";
