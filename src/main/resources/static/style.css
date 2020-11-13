@@ -21,8 +21,9 @@ td {
     text-align: center;
 }
 
-#displayedItems {
-    margin-right: 2.5%
+.displayedItems {
+    margin-right: 2.5%;
+    border: none;
 }
 
 .dropdown {
